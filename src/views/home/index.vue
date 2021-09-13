@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <!-- 左侧分类 -->
-    <HomeLeft />
+  <div class="page-home">
+    <div class="container">
+      <!-- 左侧分类 -->
+      <HomeLeft />
+    </div>
   </div>
 </template>
 
@@ -18,3 +20,13 @@ export default {
   }
 }
 </script>
+
+<style scoped lang='less'>
+.xtx-home-page {
+  .container {
+    width: 1240px;
+    margin: 0 auto;
+    position: relative;
+  }
+}
+</style>

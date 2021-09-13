@@ -1,4 +1,4 @@
-import { getHeadCategoryAPI } from '@/api'
+import { getHeadCategoryAPI, getBrandAPI } from '@/api'
 import { category } from '@/utils/constant'
 
 export default {
@@ -14,9 +14,23 @@ export default {
     }
   },
   actions: {
+    // 头部分类弹窗列表
     async getClassify (store) {
-      const { result } = await getHeadCategoryAPI()
-      store.commit('setClassify', result)
+      try {
+        const { result } = await getHeadCategoryAPI()
+        store.commit('setClassify', result)
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    // 品牌弹窗列表
+    async getBrand () {
+      try {
+        const { result: res } = await getBrandAPI({ limit: 6 })
+        return res
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
   getters: {
@@ -24,7 +38,7 @@ export default {
       return state.classify.map(item => {
         return {
           ...item,
-          children: item.children && item.children.filter((i, index) => index < 2)
+          children: item.children && item.children.filter((item, i) => i < 2)
         }
       })
     }

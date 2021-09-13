@@ -9,9 +9,9 @@ const baseURL = 'http://apipc-xiaotuxian-front.itheima.net/'
 // 创建实例
 const instance = axios.create({
   // 设置基准的接口请求路径
-  baseURL: baseURL,
+  baseURL: baseURL
   // 设置超出时间
-  timeout: 3000
+  // timeout: 3000
 })
 
 // 请求拦截器
