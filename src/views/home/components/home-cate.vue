@@ -1,7 +1,7 @@
 <template>
   <div class='home-category'>
     <ul class="menu">
-      <li v-for="item in store.getters['cate/cateClassify']" :key="item.id" @mouseenter="categoryGoods=item.goods" @mouseleave="categoryGoods=''">
+      <li v-for="item in store.getters['cate/cateClassify']" :key="item.id" @mouseenter="categoryGoods=item.goods">
         <RouterLink to="/">{{item.name}}</RouterLink>
         <template v-if="item.children">
           <RouterLink to="/" v-for="i in item.children" :key="i.id">{{i.name}}</RouterLink>
@@ -67,7 +67,9 @@ export default {
     store.dispatch('cate/getBrand').then(res => {
       brand.value = res
     })
+    // 进入品牌选项的状态
     const brandstate = ref(0)
+
     return { store, categoryGoods, brand, brandstate }
   }
 }

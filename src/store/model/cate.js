@@ -1,4 +1,5 @@
-import { getHeadCategoryAPI, getBrandAPI } from '@/api'
+// 首页模块
+import { getHeadCategoryAPI, getBrandAPI, getBannerAPI } from '@/api'
 import { category } from '@/utils/constant'
 
 export default {
@@ -27,6 +28,15 @@ export default {
     async getBrand () {
       try {
         const { result: res } = await getBrandAPI({ limit: 6 })
+        return res
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    // 轮播图图片URL
+    async getBanner () {
+      try {
+        const { result: res } = await getBannerAPI()
         return res
       } catch (err) {
         console.error(err)

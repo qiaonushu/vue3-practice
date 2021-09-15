@@ -16,3 +16,20 @@ export const getBrandAPI = data => {
     data
   })
 }
+
+// 首页-广告区域
+export const getBannerAPI = () => {
+  return request({
+    url: '/home/banner',
+    method: 'get'
+  })
+}
+
+// 首页-新鲜好物
+export const getNewAPI = data => {
+  return request({
+    url: '/home/new',
+    method: 'get',
+    data
+  })
+}
