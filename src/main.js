@@ -7,4 +7,8 @@ import 'normalize.css'
 import '@/styles/common.less'
 
 // 插件的使用，在main.js使用app.use(插件)
-createApp(App).use(XtxUI).use(store).use(router).mount('#app')
+createApp(App)
+  .use(XtxUI)
+  .use(store)
+  .use(router)
+  .mount('#app')

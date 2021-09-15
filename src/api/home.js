@@ -33,3 +33,11 @@ export const getNewAPI = data => {
     data
   })
 }
+
+// 首页-人气推荐
+export const getHotAPI = () => {
+  return request({
+    url: '/home/hot',
+    method: 'get'
+  })
+}

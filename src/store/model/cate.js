@@ -15,7 +15,7 @@ export default {
     }
   },
   actions: {
-    // 头部分类弹窗列表
+    // 首页-Layout头部分类弹窗列表
     async getClassify (store) {
       try {
         const { result } = await getHeadCategoryAPI()
@@ -24,7 +24,7 @@ export default {
         console.error(err)
       }
     },
-    // 品牌弹窗列表
+    // 首页-品牌弹窗
     async getBrand () {
       try {
         const { result: res } = await getBrandAPI({ limit: 6 })
@@ -33,7 +33,7 @@ export default {
         console.error(err)
       }
     },
-    // 轮播图图片URL
+    // 首页-轮播图
     async getBanner () {
       try {
         const { result: res } = await getBannerAPI()
