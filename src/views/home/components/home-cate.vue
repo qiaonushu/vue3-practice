@@ -1,7 +1,7 @@
 <template>
   <div class='home-category'>
     <ul class="menu">
-      <li v-for="item in store.getters['cate/cateClassify']" :key="item.id" @mouseenter="categoryGoods=item.goods">
+      <li v-for="item in $store.getters['cate/cateClassify']" :key="item.id" @mouseenter="categoryGoods=item.goods">
         <RouterLink to="/">{{item.name}}</RouterLink>
         <template v-if="item.children">
           <RouterLink to="/" v-for="i in item.children" :key="i.id">{{i.name}}</RouterLink>
@@ -11,7 +11,7 @@
           <XtxSkeleton width="50px" height="18px" bg="rgba(255,255,255,0.2)" />
         </span>
       </li>
-      <li v-if="store.getters['cate/cateClassify']" @mouseenter="brandstate=true" @mouseleave="brandstate=false">
+      <li v-if="$store.getters['cate/cateClassify']" @mouseenter="brandstate=true" @mouseleave="brandstate=false">
         <RouterLink to="/">品牌</RouterLink>
         <RouterLink to="/">品牌推荐</RouterLink>
       </li>
@@ -52,25 +52,24 @@
 </template>
 
 <script>
-import { useStore } from 'vuex'
 import { ref } from 'vue'
+import { getBrandAPI } from '@/api'
 
 export default {
   name: 'HomeCategory',
   setup () {
-    // 实例store，vuex
-    const store = useStore()
     // 当前鼠标悬停的分类的goods
     const categoryGoods = ref('')
     // 获取品牌弹窗内容
     const brand = ref(null)
-    store.dispatch('cate/getBrand').then(res => {
-      brand.value = res
+    // 首页-品牌弹窗
+    getBrandAPI({ limit: 6 }).then(res => {
+      brand.value = res.result
     })
     // 进入品牌选项的状态
     const brandstate = ref(0)
 
-    return { store, categoryGoods, brand, brandstate }
+    return { categoryGoods, brand, brandstate }
   }
 }
 </script>

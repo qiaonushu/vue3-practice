@@ -1,6 +1,6 @@
 <template>
-  <HomePanel title="人气推荐" sub-title="人气爆款 不容错过">
-    <div style="position: relative;height: 426px;" ref="target">
+  <HomePanel title="人气推荐" sub-title="人气爆款 不容错过" ref="target">
+    <div style="position: relative;height: 426px;">
       <Transition name="fade">
         <ul v-if="goods.length" class="goods-list">
           <li v-for="item in goods" :key="item.id">
@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import HomePanel from '@/views/home/components/home-pannel.vue'
-import HomeSkeleton from '@/views/home/components/home-skeleton.vue'
+import HomePanel from './home-pannel.vue'
+import HomeSkeleton from './home-skeleton.vue'
 import { useLazyData } from '@/hook'
 import { getHotAPI } from '@/api'
 

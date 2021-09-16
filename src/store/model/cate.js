@@ -1,5 +1,5 @@
 // 首页模块
-import { getHeadCategoryAPI, getBrandAPI, getBannerAPI } from '@/api'
+import { getHeadCategoryAPI, getBannerAPI } from '@/api'
 import { category } from '@/utils/constant'
 
 export default {
@@ -24,22 +24,14 @@ export default {
         console.error(err)
       }
     },
-    // 首页-品牌弹窗
-    async getBrand () {
-      try {
-        const { result: res } = await getBrandAPI({ limit: 6 })
-        return res
-      } catch (err) {
-        console.error(err)
-      }
-    },
     // 首页-轮播图
     async getBanner () {
       try {
         const { result: res } = await getBannerAPI()
-        return res
+        return Promise.resolve(res) // 返回成功的Promise对象
       } catch (err) {
         console.error(err)
+        return Promise.reject(err) // 返回失败的Promise对象
       }
     }
   },

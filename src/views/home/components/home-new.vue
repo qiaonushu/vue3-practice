@@ -1,9 +1,9 @@
 <template>
-  <HomePanel title="新鲜好物" sub-title="新鲜出炉 品质靠谱">
+  <HomePanel title="新鲜好物" sub-title="新鲜出炉 品质靠谱" ref="target">
     <template #right>
       <XtxMore :path="'/'" />
     </template>
-    <div style="position: relative;height: 406px;" ref="target">
+    <div style="position: relative;height: 406px;">
       <Transition name="fade">
         <!-- 面板内容 -->
         <ul v-if="goods.length" class="goods-list">
@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import HomePanel from '@/views/home/components/home-pannel.vue'
-import HomeSkeleton from '@/views/home/components/home-skeleton.vue'
+import HomePanel from './home-pannel.vue'
+import HomeSkeleton from './home-skeleton.vue'
 import { useLazyData } from '@/hook'
 import { getNewAPI } from '@/api'
 
