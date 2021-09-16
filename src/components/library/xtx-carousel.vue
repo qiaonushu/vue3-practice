@@ -67,6 +67,8 @@ export default {
     const toggle = (state) => {
       // 判断并设置index的值
       state ? index.value -= 1 : index.value += 1
+      if (index.value >= props.imgList.length) index.value = 0
+      if (index.value < 0) index.value = props.imgList.length - 1
     }
     // 判断是否要调用函数开启定时器
     if (props.autoPlay) autoPlayFn()

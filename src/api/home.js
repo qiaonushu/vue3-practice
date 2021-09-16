@@ -41,3 +41,11 @@ export const getHotAPI = () => {
     method: 'get'
   })
 }
+
+// 首页-产品区块
+export const getGoodsAPI = () => {
+  return request({
+    url: '/home/goods',
+    method: 'get'
+  })
+}

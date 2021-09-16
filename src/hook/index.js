@@ -20,6 +20,10 @@ export const useLazyData = apiFn => {
         // 停止监听
         stop()
       }
+    },
+    {
+      // 组件进入可视区域的比例 取值，0 - 1 百分比
+      threshold: 0
     }
   )
   // result表示接口懒加载获取的业务数据
