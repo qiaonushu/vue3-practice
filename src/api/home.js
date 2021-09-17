@@ -43,7 +43,7 @@ export const getHotAPI = () => {
 }
 
 // 首页-产品区块
-export const getGoodsAPI = () => {
+export const getHomeGoodsAPI = () => {
   return request({
     url: '/home/goods',
     method: 'get'

@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state () {
     return {
-      classify: category.map((item, index) => ({ id: index, name: item }))
+      classify: category.map((item, index) => ({ id: `${index}`, name: item }))
     }
   },
   mutations: {

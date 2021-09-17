@@ -29,14 +29,14 @@
 import HomePanel from './home-pannel'
 import HomeGoods from './home-goods'
 import { useLazyData } from '@/hook'
-import { getGoodsAPI } from '@/api'
+import { getHomeGoodsAPI } from '@/api'
 
 export default {
   name: 'HomeProduct',
   components: { HomePanel, HomeGoods },
   setup () {
     // 首页-产品区块
-    const { result, target } = useLazyData(getGoodsAPI)
+    const { result, target } = useLazyData(getHomeGoodsAPI)
 
     return { result, target }
   }
