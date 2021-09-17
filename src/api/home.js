@@ -49,3 +49,12 @@ export const getGoodsAPI = () => {
     method: 'get'
   })
 }
+
+// 首页-最新专题
+export const getSpecialAPI = data => {
+  return request({
+    url: '/home/special',
+    method: 'get',
+    data
+  })
+}

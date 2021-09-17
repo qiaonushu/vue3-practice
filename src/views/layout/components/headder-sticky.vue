@@ -11,8 +11,8 @@
     </div>
   </div> -->
   <!-- 第三方实现 -->
-  <div class="app-header-sticky" :class="{show:y>=78}">
-    <div class="container">
+  <div class="app-header-sticky" :class='{show:top>=78}'>
+    <div class="container" v-if="top>=78">
       <RouterLink class="logo" to="/" />
       <TopCommon />
       <div class="right">
@@ -43,8 +43,9 @@ export default {
 
     // 第三方实现
     // y表示具体顶部的滚动距离 会动态更新
-    const { y } = useWindowScroll()
-    return { y }
+    const { y: top } = useWindowScroll()
+
+    return { top }
   }
 }
 </script>

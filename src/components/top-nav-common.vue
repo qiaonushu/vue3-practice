@@ -4,14 +4,14 @@
       <RouterLink to="/">首页</RouterLink>
     </li>
     <li v-for="item in store.state.cate.classify" :key="item.id">
-      <a href="#"> {{item.name}} </a>
-      <div class="layer">
+      <RouterLink :to="`/category/${item.id}`" @click="open=false" @mouseenter="open=true"> {{item.name}} </RouterLink>
+      <div class="layer" v-if="open">
         <ul>
           <li v-for="i in item.children" :key="i.id">
-            <a href="#">
-              <img :src="i.picture" alt="">
-              <p> {{item.name}} </p>
-            </a>
+            <RouterLink :to="`/category/sub/${i.id}`" @click="open=false">
+              <img v-lazyload="i.picture" alt="">
+              <p> {{i.name}} </p>
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -21,13 +21,15 @@
 
 <script>
 import { useStore } from 'vuex'
+import { ref } from 'vue'
 
 export default {
   name: 'AppHeaderNav',
   setup () {
     const store = useStore()
+    const open = ref(true)
     store.dispatch('cate/getClassify')
-    return { store }
+    return { store, open }
   }
 }
 </script>
