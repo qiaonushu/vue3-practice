@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item">
-    <RouterLink to="/" class="image">
+    <RouterLink :to='`/product/${id}`' class="image">
       <img v-lazyload="picture" alt="" />
     </RouterLink>
     <p class="name ellipsis-2">{{name}}</p>
@@ -19,6 +19,10 @@
 export default {
   name: 'HomeGoods',
   props: {
+    id: {
+      type: String,
+      required: true
+    },
     picture: {
       type: String,
       default: 'http://zhoushugang.gitee.io/erabbit-client-pc-static/uploads/fresh_goods_1.jpg'

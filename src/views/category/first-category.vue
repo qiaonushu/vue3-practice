@@ -30,7 +30,7 @@
           <XtxMore />
         </div>
         <div class="body">
-          <GoodsItem v-for="i in item.goods" :key="i.id" :picture="i.picture" :name="i.name" :desc="i.desc" :price="i.price" />
+          <GoodsItem v-for="i in item.goods" :key="i.id" :picture="i.picture" :name="i.name" :desc="i.desc" :price="i.price" :url="`/product/${i.id}`" />
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
 import { ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import { getGoodsAPI } from '@/api'
+import { getFirstFilterAPI } from '@/api'
 import GoodsItem from './components/goods-item.vue'
 
 export default {
@@ -49,19 +49,21 @@ export default {
     GoodsItem
   },
   setup () {
-    // 轮播图
-    const sliders = ref([])
     const store = useStore()
+    const route = useRoute()
+    // 轮播图数组
+    const sliders = ref([])
+    // 调用接口给轮播图数组赋值
     store.dispatch('cate/getBanner').then(res => {
       sliders.value = res
     })
     // 获取动态传入的Id实现一级分类的跳转，并找到一级分类的name
-    const route = useRoute()
     const firstCategory = ref('')
     // 侦听url的变化获取到最新Id并赋值
     watch(() => route.params.id, (newval) => {
+      // 判断是否是一级分类url，并且id是接口返回id是就调用接口获取数据，否则就获取依赖的固定数据的当前项
       if (route.path === `/category/${newval}` && newval.length > 1) {
-        getGoodsAPI({ id: route.params.id }).then(({ result }) => {
+        getFirstFilterAPI({ id: route.params.id }).then(({ result }) => {
           firstCategory.value = result
         })
       } else {

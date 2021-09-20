@@ -1,5 +1,5 @@
 <template>
-  <RouterLink to="/" class='goods-item'>
+  <RouterLink :to="url" class='goods-item'>
     <img v-lazyload="picture" alt="">
     <p class="name ellipsis"> {{name}} </p>
     <p class="desc ellipsis"> {{desc}} </p>
@@ -11,6 +11,10 @@
 export default {
   name: 'GoodsItem',
   props: {
+    url: {
+      type: String,
+      default: '/'
+    },
     picture: {
       type: String,
       default: 'http://zhoushugang.gitee.io/erabbit-client-pc-static/uploads/fresh_goods_2.jpg'

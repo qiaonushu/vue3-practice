@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import TopNav from '../components/top-nav.vue'
+import TopNav from './components/top-nav.vue'
 import TopHeader from './components/top-heater.vue'
-import BottomNav from '../components/bottom-nav.vue'
+import BottomNav from './components/bottom-nav.vue'
 import HeaderSticky from './components/headder-sticky.vue'
 
 export default {

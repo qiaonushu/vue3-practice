@@ -17,7 +17,7 @@
         </RouterLink>
         <ul class="goods-list">
           <li v-for="t in item.goods" :key="t.id">
-            <HomeGoods :picture="t.picture" :desc="t.desc" :name="t.name" :price="t.price" />
+            <HomeGoods :picture="t.picture" :desc="t.desc" :name="t.name" :price="t.price" :id="t.id" />
           </li>
         </ul>
       </div>

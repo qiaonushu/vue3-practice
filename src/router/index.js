@@ -4,6 +4,7 @@ const Layout = () => import('@/views/layout')
 const Home = () => import('@/views/home')
 const FirstCate = () => import('@/views/category/first-category.vue')
 const SecondCate = () => import('@/views/category/second-category.vue')
+const Goods = () => import('@/views/goods')
 
 const routes = [
   {
@@ -12,7 +13,8 @@ const routes = [
     children: [
       { path: '/', component: Home },
       { path: '/category/:id', component: FirstCate },
-      { path: '/category/sub/:id', component: SecondCate }
+      { path: '/category/sub/:id', component: SecondCate },
+      { path: '/product/:id', component: Goods }
     ]
   },
   { path: '/login', component: Login }
