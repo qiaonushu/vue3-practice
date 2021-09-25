@@ -12,7 +12,7 @@
         <!-- 列表 -->
         <ul>
           <li v-for="item in list" :key="item.id">
-            <GoodsItem :picture="item.picture" :name="item.name" :desc="item.desc" :price="item.price" />
+            <GoodsItem :picture="item.picture" :name="item.name" :desc="item.desc" :price="item.price" :url="`/product/${item.id}`" />
           </li>
         </ul>
         <XtxInfiniteLoading :loading="loading" :finished="finished" @infinite="getGoods" />

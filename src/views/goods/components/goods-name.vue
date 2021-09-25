@@ -47,7 +47,7 @@ export default {
       }
     }
   },
-  setup (props) {
+  setup () {
     // 传给城市组件的选择的最终值
     const fullLocation = ref('')
     // 城市组件自定义事件

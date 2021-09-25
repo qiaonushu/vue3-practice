@@ -20,8 +20,11 @@ export default {
   setup () {
     const store = useStore()
     const route = useRoute()
+    // 计算属性
     const cateInfo = computed(() => {
+      // 返回的是对象，所以要声明一个对象接收（不再循环内返回）
       const info = {}
+      // 循环分类找到符合条件的一级分类和二级分类
       store.state.cate.classify.filter(item => {
         if (item.children && item.children.some(i => i.id === route.params.id)) {
           info.name = item.name

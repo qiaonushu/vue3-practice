@@ -5,7 +5,7 @@
     </li>
     <li v-for="item in store.state.cate.classify" :key="item.id">
       <RouterLink :to="`/category/${item.id}`" @click="open=false" @mouseenter="open=true"> {{item.name}} </RouterLink>
-      <div class="layer" v-if="open">
+      <div class="layer" v-if="item.children&&open">
         <ul>
           <li v-for="i in item.children" :key="i.id">
             <RouterLink :to="`/category/sub/${i.id}`" @click="open=false">

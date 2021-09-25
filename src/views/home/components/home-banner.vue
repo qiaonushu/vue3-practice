@@ -13,6 +13,7 @@ export default {
   setup () {
     const store = useStore()
     const sliders = ref([])
+    // 获取轮播图url
     store.dispatch('cate/getBanner').then(res => {
       sliders.value = res
     })
