@@ -6,7 +6,7 @@
           <img :src="item.imgUrl" alt="">
         </RouterLink>
         <div v-else class="slider">
-          <RouterLink v-for="goods in item" :key="goods.id" :to="`/product/${item.id}`">
+          <RouterLink v-for="goods in item" :key="goods.id" :to="`/product/${goods.id}`">
             <img :src="goods.picture" alt="">
             <p class="name ellipsis">{{goods.name}}</p>
             <p class="price">&yen;{{goods.price}}</p>

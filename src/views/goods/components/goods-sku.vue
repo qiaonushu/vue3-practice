@@ -74,7 +74,7 @@ const updateDisabledStatus = (pm, ps) => {
       // 如果选中当前i就return，禁用的i会解除禁用
       if (i.selected) {
         // ["黄色", undefined, undefined, undefined] "黄色"
-        return
+        return true
       } else {
         // 当前规格下的分类不会被禁用
         condition[index] = i.name

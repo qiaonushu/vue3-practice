@@ -1,9 +1,27 @@
 import request from '@/utils/request'
+import { commentURL } from '@/utils/config'
 
 // 商品详情
 export const getGoodsAPI = data => {
   return request({
     url: '/goods',
+    method: 'get',
+    data
+  })
+}
+
+// 商品的评价信息
+export const getGoodsEvaluateAPI = id => {
+  return request({
+    url: `${commentURL}goods/${id}/evaluate`,
+    method: 'get'
+  })
+}
+
+// 评价分页数据
+export const getGoodsPageAPI = data => {
+  return request({
+    url: `${commentURL}goods/${data.id}/evaluate/page`,
     method: 'get',
     data
   })

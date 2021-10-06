@@ -17,8 +17,7 @@ export default {
   name: 'GoodsRelevant',
   props: {
     goodsId: {
-      type: String,
-      required: true
+      type: String
     }
   },
   setup (props) {

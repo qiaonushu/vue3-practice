@@ -9,6 +9,7 @@
     <dl>
       <dt>促销</dt>
       <dd>12月好物放送，App领券购买直降120元</dd>
+      <!-- <dd> {{goods.discount}} </dd> -->
     </dl>
     <dl>
       <dt>配送</dt>
@@ -47,7 +48,7 @@ export default {
       }
     }
   },
-  setup () {
+  setup (props) {
     // 传给城市组件的选择的最终值
     const fullLocation = ref('')
     // 城市组件自定义事件

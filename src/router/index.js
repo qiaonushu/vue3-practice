@@ -5,6 +5,9 @@ const Home = () => import('@/views/home')
 const FirstCate = () => import('@/views/category/first-category.vue')
 const SecondCate = () => import('@/views/category/second-category.vue')
 const Goods = () => import('@/views/goods')
+const LoginCallback = () => import('@/views/login/callback.vue')
+const Cart = () => import('@/views/cart/index.vue')
+const PayCheckout = () => import('@/views/member/checkout.vue')
 
 const routes = [
   {
@@ -17,7 +20,10 @@ const routes = [
       { path: '/product/:id', component: Goods }
     ]
   },
-  { path: '/login', component: Login }
+  { path: '/login', component: Login },
+  { path: '/login/callback', component: LoginCallback },
+  { path: '/cart', component: Cart },
+  { path: '/member/checkout', component: PayCheckout }
 ]
 
 const router = createRouter({

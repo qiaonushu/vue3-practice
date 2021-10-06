@@ -2,21 +2,19 @@
 import router from '@/router'
 import store from '@/store'
 import axios from 'axios'
-
-// 配置基准路径
-const baseURL = 'http://apipc-xiaotuxian-front.itheima.net/'
+import { baseURL } from './config'
 
 // 创建实例
 const instance = axios.create({
   // 设置基准的接口请求路径
-  baseURL: baseURL
+  baseURL: baseURL,
   // 设置超出时间
-  // timeout: 3000
+  timeout: 3000
 })
 
 // 请求拦截器
 instance.interceptors.request.use((config) => {
-  const token = store.state.user.token
+  const token = store.state.user.profile.token
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }
@@ -31,8 +29,11 @@ instance.interceptors.response.use((response) => {
 }, (error) => {
   if (error.response && error.response.status === 401) {
     // token失效
-    store.commmit('user/setToken', {})
-    return router.push('/login')
+    store.commit('user/setToken', {})
+    // token失效时所在的页面路径
+    console.log(router)
+    router.push('/login')
+    // router.push(`/login?url=${router.currentRoute.value.path}`)
   }
   return Promise.reject(error)
 })

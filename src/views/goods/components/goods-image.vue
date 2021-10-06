@@ -28,7 +28,13 @@ export default {
   },
   setup (props) {
     // 声明给一个变量，接收当前鼠标进入小图片的url
-    const imgURL = ref(props.images[0])
+    const imgURL = ref('')
+    // 当传入的img数组发生变化
+    watch(() => props.images, () => {
+      imgURL.value = props.images[0]
+    }, {
+      immediate: true
+    })
     // 声明变量控制盒子的显示与隐藏
     const show = ref(false)
     // 要监听的元素范围

@@ -12,7 +12,7 @@
       <div class="goods-info">
         <div class="media">
           <GoodsImage :images="detail.mainPictures" />
-          <GoodsSales />
+          <GoodsSales :sales="detail.brand" />
         </div>
         <div class="spec">
           <!-- 名字区组件 -->
@@ -20,7 +20,7 @@
           <!-- 规格组件 -->
           <GoodsSku @skuinventory="sku" :skus="detail.skus" :specs="detail.specs" />
           <XtxNumbox v-model="num" :inventory="detail.inventory"></XtxNumbox>
-          <XtxButton type="primary" style="margin-top:20px;">加入购物车</XtxButton>
+          <XtxButton type="primary" style="margin-top:20px;" @click="addCart(detail)">加入购物车</XtxButton>
         </div>
       </div>
       <!-- 商品推荐 -->
@@ -30,10 +30,12 @@
         <div class="goods-article">
           <!-- 商品+评价 -->
           <div class="goods-tabs">
-            <GoodsTabs />
+            <GoodsTabs :Id="detail.id" />
           </div>
           <!-- 注意事项 -->
-          <div class="goods-warn"></div>
+          <div class="goods-warn">
+            <GoodsWarn />
+          </div>
         </div>
         <!-- 24热榜+专题推荐 -->
         <div class="goods-aside">
@@ -46,6 +48,7 @@
 </template>
 
 <script>
+// 组件
 import GoodsRelevant from './components/goods-relevant'
 import GoodsImage from './components/goods-image.vue'
 import GoodsSales from './components/goods-sales.vue'
@@ -53,9 +56,13 @@ import GoodsName from './components/goods-name.vue'
 import GoodsSku from './components/goods-sku.vue'
 import GoodsTabs from './components/goods-tabs.vue'
 import GoodsHot from './components/goods-hot.vue'
+import GoodsWarn from './components/goods-warn.vue'
+// api
 import { getGoodsAPI } from '@/api'
-import { watch, ref } from 'vue'
+// 按需导入
+import { watch, ref, provide, getCurrentInstance } from 'vue'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 
 export default {
   name: 'GoodsPage',
@@ -66,12 +73,17 @@ export default {
     GoodsName,
     GoodsSku,
     GoodsTabs,
-    GoodsHot
+    GoodsHot,
+    GoodsWarn
   },
   setup () {
     const route = useRoute()
+    const store = useStore()
+    const instance = getCurrentInstance()
     // 声明变量获取数据
     const detail = ref({})
+    // skuId
+    const skuval = ref('')
     // 数量
     const num = ref(1)
     // 侦听id的变化，判断是否详情页的URL，是就发送请求
@@ -87,16 +99,56 @@ export default {
     // 自定义事件，传入的val是否有值，没有数量组件无法使用
     const sku = val => {
       if (val) {
-        const sku = detail.value.skus.find(item => item.id === val[0])
-        detail.value.oldPrice = sku.oldPrice
-        detail.value.price = sku.price
-        detail.value.inventory = sku.inventory
+        skuval.value = detail.value.skus.find(item => item.id === val[0])
+        console.log(skuval.value)
+        detail.value.oldPrice = skuval.value.oldPrice
+        detail.value.price = skuval.value.price
+        detail.value.inventory = skuval.value.inventory
       } else {
         detail.value.inventory = 0
+        skuval.value = ''
+      }
+    }
+    // 直接把数据传递出去:评价
+    provide('detail', detail)
+    // 点击购物车按钮事件
+    const addCart = (val) => {
+      if (!skuval.value) {
+        instance.proxy.$message({ text: '请选择规格', type: 'error' })
+      } else {
+        instance.proxy.$message({ text: '添加至购物车', type: 'success' })
+        store.commit('cart/addList', {
+          // 属性文字
+          attrsText: skuval.value.specs.reduce((sum, item) => {
+            sum += `${item.name}: ${item.valueName} `
+            return sum
+          }, ''),
+          count: num.value,
+          // 折扣信息
+          discount: null,
+          id: val.id,
+          // 是否收藏
+          isCollect: false,
+          // 有效商品
+          isEffective: true,
+          name: val.name,
+          nowOriginalprice: skuval.value.price,
+          // 当前价格
+          nowPrice: skuval.value.price,
+          picture: val.mainPictures[0],
+          postFee: '',
+          // 加入时价格
+          price: skuval.value.oldPrice,
+          // 是否选中
+          selected: true,
+          skuId: skuval.value.id,
+          // 库存
+          stock: skuval.value.inventory
+        })
       }
     }
 
-    return { detail, sku, num }
+    return { detail, num, sku, addCart }
   }
 }
 </script>

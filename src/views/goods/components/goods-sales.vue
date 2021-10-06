@@ -1,31 +1,37 @@
 <template>
   <ul class="goods-sales">
     <li>
-      <p>销量人气</p>
+      <p>销量人气orderNum</p>
       <p>200+</p>
-      <p><i class="iconfont icon-task-filling"></i>销量人气</p>
+      <p><i class="iconfont icon-task-filling"></i><a href="javascript:;">销量人气</a></p>
     </li>
     <li>
-      <p>商品评价</p>
+      <p>商品评价 commentCount</p>
       <p>400+</p>
-      <p><i class="iconfont icon-comment-filling"></i>查看评价</p>
+      <p><i class="iconfont icon-comment-filling"></i><a href="javascript:;">查看评价</a></p>
     </li>
     <li>
-      <p>收藏人气</p>
+      <p>收藏人气collectCount</p>
       <p>600+</p>
-      <p><i class="iconfont icon-favorite-filling"></i>收藏商品</p>
+      <p><i class="iconfont icon-favorite-filling"></i><a href="javascript:;">收藏商品</a></p>
     </li>
     <li>
       <p>品牌信息</p>
-      <p>苏宁电器</p>
-      <p><i class="iconfont icon-dynamic-filling"></i>品牌主页</p>
+      <p> {{sales.name}} </p>
+      <p><i class="iconfont icon-dynamic-filling"></i><a href="javascript:;">品牌主页</a></p>
     </li>
   </ul>
 </template>
 
 <script>
 export default {
-  name: 'GoodsSales'
+  name: 'GoodsSales',
+  props: {
+    sales: {
+      type: Object,
+      default: () => { }
+    }
+  }
 }
 </script>
 

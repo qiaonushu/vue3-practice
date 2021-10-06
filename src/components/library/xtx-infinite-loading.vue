@@ -25,6 +25,10 @@ export default {
     finished: {
       type: Boolean,
       default: false
+    },
+    threshold: {
+      type: Number,
+      default: 0
     }
   },
   setup (props, { emit }) {
@@ -39,7 +43,7 @@ export default {
         }
       },
       {
-        threshold: 0
+        threshold: props.threshold
       }
     )
     return { container }

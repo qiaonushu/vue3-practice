@@ -1,7 +1,10 @@
 const path = require('path')
+const a = path.join(__dirname, './src/styles/variables.less')
+console.log(a)
 
 module.exports = {
   chainWebpack: config => {
+    config.devServer.disableHostCheck(true)
     config.module
       .rule('images')
       .use('url-loader')
